@@ -19,18 +19,28 @@ class Question
 	{
 		return value;
 	}
+	bool match(std::vector<int> example);
+	const std::string to_string();
 
   private:
 	int column;
 	int value;
 };
 
-class DecisionNode
+class Node
+{
+  public:
+	Node() {}
+	virtual ~Node() {}
+	virtual const std::string to_string() = 0;
+};
+
+class DecisionNode : public Node
 {
   public:
 	DecisionNode(Question *question,
-				 DecisionNode *true_branch,
-				 DecisionNode *false_branch)
+				 Node *true_branch,
+				 Node *false_branch)
 		: question(question),
 		  true_branch(true_branch),
 		  false_branch(false_branch) {}
@@ -40,18 +50,21 @@ class DecisionNode
 		delete true_branch;
 		delete false_branch;
 	}
+	const std::string to_string() override;
 
   private:
 	Question *question;
-	DecisionNode *true_branch;
-	DecisionNode *false_branch;
+	Node *true_branch;
+	Node *false_branch;
 };
 
-class EndNode
+class EndNode : public Node
 {
   public:
 	EndNode(std::vector<std::vector<int>> data)
 		: data(data) {}
+	~EndNode() {}
+	const std::string to_string() override;
 
   private:
 	std::vector<std::vector<int>> data;
