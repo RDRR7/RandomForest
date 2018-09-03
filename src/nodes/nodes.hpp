@@ -4,6 +4,12 @@
 #include <string>
 #include <vector>
 
+enum class NodeType
+{
+	DECISIONNODE = 1,
+	ENDNODE = 2,
+};
+
 class Question
 {
   public:
@@ -30,9 +36,17 @@ class Question
 class Node
 {
   public:
-	Node() {}
+	Node(NodeType type)
+		: type(type) {}
 	virtual ~Node() {}
 	virtual const std::string to_string() = 0;
+	NodeType get_type()
+	{
+		return type;
+	}
+
+  private:
+	NodeType type;
 };
 
 class DecisionNode : public Node
@@ -41,7 +55,8 @@ class DecisionNode : public Node
 	DecisionNode(Question *question,
 				 Node *true_branch,
 				 Node *false_branch)
-		: question(question),
+		: Node(NodeType::DECISIONNODE),
+		  question(question),
 		  true_branch(true_branch),
 		  false_branch(false_branch) {}
 	~DecisionNode()
@@ -51,6 +66,18 @@ class DecisionNode : public Node
 		delete false_branch;
 	}
 	const std::string to_string() override;
+	Question *get_question()
+	{
+		return question;
+	}
+	Node *get_true_branch()
+	{
+		return true_branch;
+	}
+	Node *get_false_branch()
+	{
+		return false_branch;
+	}
 
   private:
 	Question *question;
@@ -62,9 +89,15 @@ class EndNode : public Node
 {
   public:
 	EndNode(std::vector<std::vector<int>> data)
-		: data(data) {}
+		: Node(NodeType::ENDNODE),
+		  data(data) {}
 	~EndNode() {}
 	const std::string to_string() override;
+	std::vector<std::vector<int>> get_data()
+	{
+		return data;
+	}
+	void print_classification();
 
   private:
 	std::vector<std::vector<int>> data;

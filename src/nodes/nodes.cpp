@@ -1,5 +1,7 @@
 #include "nodes.hpp"
 #include <set>
+#include <iostream>
+#include <iomanip>
 
 bool Question::match(std::vector<int> example)
 {
@@ -64,4 +66,44 @@ const std::string EndNode::to_string()
 
 	end_node_str += " }\n";
 	return end_node_str;
+}
+
+void EndNode::print_classification()
+{
+	double total = 0;
+	std::set<int> values;
+	for (auto row : data)
+	{
+		total++;
+		values.insert(row.back());
+	}
+
+	bool first = true;
+	for (auto label : values)
+	{
+		if (first)
+		{
+			first = false;
+			std::cout << " [ ";
+		}
+		else
+		{
+			std::cout << ", [ ";
+		}
+		std::cout << label;
+		std::cout << " ]: ";
+		int count = 0;
+		for (int i = 0; i < data.size(); i++)
+		{
+			if (data[i].back() == label)
+			{
+				count++;
+			}
+		}
+		std::cout << std::fixed;
+		std::cout << std::setprecision(2);
+		std::cout << (double)count / total * 100;
+		std::cout << "% ";
+	}
+	std::cout << std::endl;
 }

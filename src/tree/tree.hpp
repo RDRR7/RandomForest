@@ -20,6 +20,10 @@ class Tree
 		root = _build_tree(data);
 	}
 	const std::string to_string();
+	EndNode *classify(std::vector<int> row)
+	{
+		return _classify(row, root);
+	}
 
   private:
 	std::vector<std::vector<int>> data;
@@ -35,6 +39,7 @@ class Tree
 	double info_gain(std::vector<std::vector<int>> left,
 					 std::vector<std::vector<int>> right,
 					 double current_uncertainty);
+	EndNode *_classify(std::vector<int> row, Node *node);
 };
 
 #endif

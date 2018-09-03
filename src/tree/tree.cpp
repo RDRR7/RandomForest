@@ -134,3 +134,22 @@ const std::string Tree::to_string()
 	tree_str += root->to_string();
 	return tree_str;
 }
+
+EndNode *Tree::_classify(std::vector<int> row, Node *node)
+{
+	if (node->get_type() == NodeType::ENDNODE)
+	{
+		return static_cast<EndNode *>(node);
+	}
+
+	DecisionNode *decision_node = static_cast<DecisionNode *>(node);
+
+	if (decision_node->get_question()->match(row))
+	{
+		return _classify(row, decision_node->get_true_branch());
+	}
+	else
+	{
+		return _classify(row, decision_node->get_false_branch());
+	}
+}
