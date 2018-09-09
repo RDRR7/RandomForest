@@ -3,3 +3,9 @@ std::vector<std::vector<double>> data = {{1, 3, 1},
 										 {3, 1, 3},
 										 {3, 1, 3},
 										 {2, 3, 2}};
+
+std::vector<double> test1 = {1, 3, 1};
+std::vector<double> test2 = {2, 4, 1};
+std::vector<double> test3 = {3, 2, 3};
+std::vector<double> test4 = {3, 1, 3};
+std::vector<double> test5 = {2, 3, 2};

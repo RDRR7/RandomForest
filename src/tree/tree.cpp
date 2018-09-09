@@ -27,9 +27,9 @@ Node *Tree::_build_tree(std::vector<std::vector<double>> rows)
 	return new DecisionNode(question, true_branch, false_branch);
 }
 
-std::map<int, int> class_counts(std::vector<std::vector<double>> rows)
+std::unordered_map<int, int> class_counts(std::vector<std::vector<double>> rows)
 {
-	std::map<int, int> counts;
+	std::unordered_map<int, int> counts;
 	for (auto row : rows)
 	{
 		int label = row.back();
@@ -40,7 +40,7 @@ std::map<int, int> class_counts(std::vector<std::vector<double>> rows)
 
 double Tree::gini(std::vector<std::vector<double>> rows)
 {
-	std::map<int, int> counts = class_counts(rows);
+	std::unordered_map<int, int> counts = class_counts(rows);
 	double impurity = 1;
 	for (const auto &label : counts)
 	{
