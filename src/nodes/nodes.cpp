@@ -90,6 +90,8 @@ void EndNode::print_classification()
 		{
 			std::cout << ", [ ";
 		}
+		std::cout << std::fixed;
+		std::cout << std::setprecision(0);
 		std::cout << label;
 		std::cout << " ]: ";
 		int count = 0;
