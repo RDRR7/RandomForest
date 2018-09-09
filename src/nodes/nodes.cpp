@@ -2,6 +2,7 @@
 #include <set>
 #include <iostream>
 #include <iomanip>
+#include <unordered_map>
 
 bool Question::match(std::vector<double> example)
 {
@@ -108,4 +109,32 @@ void EndNode::print_classification()
 		std::cout << "% ";
 	}
 	std::cout << std::endl;
+}
+
+double EndNode::classify()
+{
+	double highest_label = 0;
+	int highest_value = 0;
+	std::unordered_map<double, int> values;
+	for (auto row : data)
+	{
+		values[row.back()]++;
+	}
+	for (auto label_count : values)
+	{
+		if (label_count.second > highest_value)
+		{
+			highest_label = label_count.first;
+			highest_value = label_count.second;
+		}
+		if (label_count.second == highest_value)
+		{
+			if (std::rand() % 1)
+			{
+				highest_label = label_count.first;
+				highest_value = label_count.second;
+			}
+		}
+	}
+	return highest_label;
 }

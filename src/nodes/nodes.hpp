@@ -98,6 +98,7 @@ class EndNode : public Node
 		return data;
 	}
 	void print_classification();
+	double classify();
 
   private:
 	std::vector<std::vector<double>> data;
