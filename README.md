@@ -8,3 +8,8 @@ cd build/
 cmake ../src/
 make
 ```
+
+## 🏃🏻‍ Run
+```
+./random_forest.elf <forest_size>
+```
