@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iomanip>
 
-bool Question::match(std::vector<int> example)
+bool Question::match(std::vector<double> example)
 {
 	return example[column] >= value;
 }
@@ -33,7 +33,7 @@ const std::string EndNode::to_string()
 {
 	std::string end_node_str = "predict {";
 
-	std::set<int> values;
+	std::set<double> values;
 	for (auto row : data)
 	{
 		values.insert(row.back());
@@ -71,7 +71,7 @@ const std::string EndNode::to_string()
 void EndNode::print_classification()
 {
 	double total = 0;
-	std::set<int> values;
+	std::set<double> values;
 	for (auto row : data)
 	{
 		total++;
@@ -84,7 +84,7 @@ void EndNode::print_classification()
 		if (first)
 		{
 			first = false;
-			std::cout << " [ ";
+			std::cout << "[ ";
 		}
 		else
 		{

@@ -14,23 +14,23 @@ class Question
 {
   public:
 	Question(int column,
-			 int value)
+			 double value)
 		: column(column),
 		  value(value) {}
 	int get_column()
 	{
 		return column;
 	}
-	int get_value()
+	double get_value()
 	{
 		return value;
 	}
-	bool match(std::vector<int> example);
+	bool match(std::vector<double> example);
 	const std::string to_string();
 
   private:
 	int column;
-	int value;
+	double value;
 };
 
 class Node
@@ -88,19 +88,19 @@ class DecisionNode : public Node
 class EndNode : public Node
 {
   public:
-	EndNode(std::vector<std::vector<int>> data)
+	EndNode(std::vector<std::vector<double>> data)
 		: Node(NodeType::ENDNODE),
 		  data(data) {}
 	~EndNode() {}
 	const std::string to_string() override;
-	std::vector<std::vector<int>> get_data()
+	std::vector<std::vector<double>> get_data()
 	{
 		return data;
 	}
 	void print_classification();
 
   private:
-	std::vector<std::vector<int>> data;
+	std::vector<std::vector<double>> data;
 };
 
 #endif
