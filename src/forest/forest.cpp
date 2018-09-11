@@ -71,6 +71,19 @@ double Forest::classify(std::vector<double> row)
 	return highest_label;
 }
 
+double Forest::calculate_precision()
+{
+	int count = 0;
+	for (auto entry : test_data)
+	{
+		if (classify(entry) == entry.back())
+		{
+			count++;
+		}
+	}
+	return count / static_cast<double>(test_data.size()) * 100;
+}
+
 double Forest::calculate_error()
 {
 	int count = 0;
@@ -81,5 +94,5 @@ double Forest::calculate_error()
 			count++;
 		}
 	}
-	return 1 - (count / static_cast<double>(test_data.size()));
+	return (1 - (count / static_cast<double>(test_data.size()))) * 100;
 }
