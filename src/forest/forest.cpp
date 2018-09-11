@@ -6,12 +6,17 @@
 
 Forest::Forest(std::vector<std::vector<double>> data, int forest_size)
 {
-	assert(forest_size <= data.size());
 	std::random_shuffle(data.begin(), data.end());
-	std::unordered_map<int, std::vector<std::vector<double>>> partitions;
 
+	std::size_t train_size = data.size() * 0.80;
+	assert(forest_size <= train_size);
+
+	std::vector<std::vector<double>> train_data(data.begin(), data.begin() + train_size);
+	test_data = std::vector<std::vector<double>>(data.begin() + train_size, data.end());
+
+	std::unordered_map<int, std::vector<std::vector<double>>> partitions;
 	int i = 0;
-	for (auto line : data)
+	for (auto line : train_data)
 	{
 		partitions[i].push_back(line);
 		i++;
@@ -64,4 +69,17 @@ double Forest::classify(std::vector<double> row)
 		}
 	}
 	return highest_label;
+}
+
+double Forest::calculate_error()
+{
+	int count = 0;
+	for (auto entry : test_data)
+	{
+		if (classify(entry) == entry.back())
+		{
+			count++;
+		}
+	}
+	return 1 - (count / static_cast<double>(test_data.size()));
 }
