@@ -10,8 +10,8 @@ include_directories (${PROJECT_SOURCE_DIR}/forest)
 
 add_executable (
 	random_forest.elf
-	${PROJECT_SOURCE_DIR}/nodes/nodes.cpp
-	${PROJECT_SOURCE_DIR}/tree/tree.cpp
-	${PROJECT_SOURCE_DIR}/forest/forest.cpp
+	nodes/nodes.cpp
+	tree/tree.cpp
+	forest/forest.cpp
 	main.cpp
 )

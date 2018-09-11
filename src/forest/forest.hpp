@@ -10,6 +10,7 @@ class Forest
 	Forest(std::vector<std::vector<double>> data, int forest_size);
 	~Forest();
 	double classify(std::vector<double> row);
+	double calculate_precision();
 	double calculate_error();
 
   private:

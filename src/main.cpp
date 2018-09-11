@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 #include "forest.hpp"
 
 int main(int argc, char *argv[])
@@ -160,15 +161,20 @@ int main(int argc, char *argv[])
 
 	Forest forest(data, std::stoi(argv[1]));
 
-	std::cout << forest.calculate_error() << std::endl;
+	std::cout << std::fixed;
+	std::cout << std::setprecision(2);
+	std::cout << "Precision: " << forest.calculate_precision() << "%" << std::endl;
+	std::cout << "Error: " << forest.calculate_error() << "%" << std::endl;
 
 	std::vector<double> test1 = {5.1, 3.5, 1.4, 0.2, 1};
 	std::vector<double> test2 = {6.7, 3.3, 5.7, 2.1, 3};
 	std::vector<double> test3 = {6.4, 2.9, 4.3, 1.3, 2};
 
-	std::cout << forest.classify(test1) << std::endl;
-	std::cout << forest.classify(test2) << std::endl;
-	std::cout << forest.classify(test3) << std::endl;
+	std::cout << std::fixed;
+	std::cout << std::setprecision(0);
+	std::cout << "{5.1, 3.5, 1.4, 0.2} expected: 1, predicted: " << forest.classify(test1) << std::endl;
+	std::cout << "{6.7, 3.3, 5.7, 2.1} expected: 3, predicted: " << forest.classify(test2) << std::endl;
+	std::cout << "{6.4, 2.9, 4.3, 1.3} expected: 2, predicted: " << forest.classify(test3) << std::endl;
 
 	return 0;
 }
